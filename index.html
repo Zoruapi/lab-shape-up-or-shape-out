@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        >
+        <title>Lab: Shape Up or Shape Out</title>
+        <!-- Bootstrap styles-->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous"
+        >
+        <link
+            rel="stylesheet"
+            href="styles.css"
+        >
+    </head>
+
+    <body>
+
+        <main class="container">
+            <section class="row justify-content-around my-3">
+                <!-- Rectangle inputs -->
+                <div class="col-12 col-md-5 col-lg-2 mb-3 mx-3 border rounded">
+                    <form class="myForm">
+                        <div class="mb-3">
+                            <label
+                                for="rectangleWidth"
+                                class="form-label"
+                            >Width</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="rectangleWidth"
+                                aria-label="Width of Rectangle"
+                            >
+                        </div>
+                        <div class="my-3">
+                            <label
+                                for="rectangleHeight"
+                                class="form-label"
+                            >Height</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="rectangleHeight"
+                                aria-label="Height of Rectangle"
+                            >
+                        </div>
+                        <button
+                            type="submit"
+                            class="btn btn-primary mb-3"
+                            id="drawRectangle"
+                        >Rectangle</button>
+                    </form>
+                </div>
+                <!-- Square inputs -->
+                <div class="col-12 col-md-5 col-lg-2 mb-3 mx-3 border rounded">
+                    <form class="myForm">
+                        <div class="my-3">
+                            <label
+                                for="lengthSquare"
+                                class="form-label"
+                            >Side length</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="lengthSquare"
+                                aria-label="Side length of square"
+                            >
+                        </div>
+                        <button
+                            type="submit"
+                            class="btn btn-primary mb-3"
+                            id="drawSquare"
+                        >Square</button>
+                    </form>
+                </div>
+                <!-- Circle inputs -->
+                <div class="col-12 col-md-5 col-lg-2 mb-3 mx-3 border rounded">
+                    <form class="myForm">
+                        <div class="my-3">
+                            <label
+                                for="circleRadius"
+                                class="form-label"
+                            >Radius</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="circleRadius"
+                                aria-label="Radius of circle"
+                            >
+                        </div>
+                        <button
+                            type="submit"
+                            class="btn btn-primary mb-3"
+                            id="drawCircle"
+                        >Circle</button>
+                    </form>
+                </div>
+                <!-- Triangle inputs -->
+                <div class="col-12 col-md-5 col-lg-2 mb-3 mx-3 border rounded">
+                    <form class="myForm">
+                        <div class="my-3">
+                            <label
+                                for="triangleHeight"
+                                class="form-label"
+                            >Height</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="triangleHeight"
+                                aria-describedby="emailHelp"
+                            >
+                        </div>
+                        <button
+                            type="submit"
+                            class="btn btn-primary mb-3"
+                            id="drawTriangle"
+                        >Triangle</button>
+                    </form>
+                </div>
+            </section>
+            <section class="row mt-3 justify-content-center">
+                <div class="draw-area col-12 col-md-10"></div>
+                <div class="shape-info col-2">
+                    <div class="shapeName">Shape Name:</div>
+                    <div class="width">Width:</div>
+                    <div class="height">Height:</div>
+                    <div class="radius">Radius:</div>
+                    <div class="area">Area:</div>
+                    <div class="perimeter">Perimeter:</div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Bootstrap js -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"
+        ></script>
+        <!-- JQuery -->
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"
+        ></script>
+        <script src="scripts.js"></script>
+    </body>
+
+</html>
