@@ -1,4 +1,3 @@
-let MAX = 600;
 let $shapeContainer = $('.draw-area');
 
 // Functionality on page load
@@ -7,6 +6,9 @@ $(function () {
     $('.myForm').submit(function (e) {
         e.preventDefault();
     })
+    $shapeContainer.css('height', $shapeContainer.css('width'));
+
+    $(window).on('resize', () => $shapeContainer.css('height', $shapeContainer.css('width')));
 
     // Event listenners for the buttons
     $('#drawRectangle').on('click', drawRectangle);
@@ -60,9 +62,12 @@ class Shape {
         return this.width * this.height;
     }
 
+    // randomValue(0, (MAX - this.width))
     shapeDef() {
-        this.divShape.css({ left: `${randomValue(0, (MAX - this.width))}px`, top: `${randomValue(0, (MAX - this.height))}px` });
-        this.divShape.css({ width: `${this.width}px`, height: `${this.height}px` });
+        let containerWidth = parseInt($($shapeContainer).css('width'), 10);
+        let containerHeight = parseInt($($shapeContainer).css('height'), 10);
+        this.relativePosition(containerWidth, containerHeight);
+        this.relativeSize(containerWidth, containerHeight);
     }
 
     // Removes previous info and shows the info of the current shape
@@ -106,6 +111,18 @@ class Shape {
     eventListenners() {
         this.divShape.on('click', () => this.describe());
         this.divShape.on('dblclick', () => this.divShape.remove());
+    }
+
+    relativePosition(containerWidth, containerHeight) {
+        let percentageWidth = percentageOf(containerWidth, randomValue(0, (containerWidth - this.width)));
+        let percentageHeight = percentageOf(containerHeight, randomValue(0, (containerHeight - this.height)));
+        this.divShape.css({ left: `${percentageWidth}%`, top: `${percentageHeight}%` });
+    }
+
+    relativeSize(containerWidth, containerHeight) {
+        let percentageWidth = percentageOf(containerWidth, this.width);
+        let percentageHeight = percentageOf(containerHeight, this.height);
+        this.divShape.css({ width: `${percentageWidth}%`, height: `${percentageHeight}%` });
     }
 }
 
@@ -157,6 +174,7 @@ class Triangle extends Shape {
         this.area = this.shapeArea();
         this.perimeter = this.shapePerimeter();
         this.shapeInfo();
+        $(window).on('resize', () => this.calcSize());
     }
 
     // Calculates area of a triangle
@@ -173,8 +191,20 @@ class Triangle extends Shape {
     shapeDef() {
         super.shapeDef();
         this.divShape.css({ width: '0px', height: '0px' });
-        this.divShape.css(`border-bottom`, `${this.height}px solid yellow`);
-        this.divShape.css(`border-right`, `${this.height}px solid transparent`);
+        this.calcSize();
+    }
+
+    calcSize() {
+        let containerWidth = parseInt($($shapeContainer).css('width'), 10);
+        if (containerWidth === 600) {
+            this.divShape.css(`border-bottom`, `${this.height}px solid yellow`);
+            this.divShape.css(`border-right`, `${this.height}px solid transparent`);
+        } else {
+            let percentageWidth = percentageOf(600, containerWidth);
+
+            this.divShape.css(`border-bottom`, `${((percentageWidth * this.width) / 100).toFixed(2)}px solid yellow`);
+            this.divShape.css(`border-right`, `${((percentageWidth * this.width) / 100).toFixed(2)}px solid transparent`);
+        }
     }
 
     // Defines the span of the specific shape
@@ -238,4 +268,8 @@ class Square extends Rectangle {
 // Generic function that creates a random value given it's maximum and minimum
 function randomValue(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function percentageOf(max, value) {
+    return ((value * 100) / max).toFixed(2);
 }
